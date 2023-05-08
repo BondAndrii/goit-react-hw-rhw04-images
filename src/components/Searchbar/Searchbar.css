@@ -1,0 +1,13 @@
+.searchbar {
+    display: flex;
+    width: 100vw;
+    height: 100px;
+    color:black;
+    background-color: aquamarine;
+}
+.form {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}

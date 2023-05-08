@@ -64,7 +64,7 @@ export default function App() {
     return (
           <div className="App">
             <Searchbar priSubmit={handleAppSubmit} />
-            {status === 'idle' && <h2>Введіть, щоб ви хотіли побачити...</h2>}
+            {status === 'idle' && <h2>Введіть, щоб ви хотіли побачити?...</h2>}
             {status === 'pending' && <Loader />}
             {status === 'rejected' && <h2>Нажаль, за запитом нічого не знайшли</h2>}
             {status === 'resolved' && <ImageGallery images={images} onClick={handleClickImg}/>}        

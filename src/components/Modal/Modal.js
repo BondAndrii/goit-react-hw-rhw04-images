@@ -1,6 +1,5 @@
 
-import React from "react";
-import { useEffect } from "react";
+import React, { Component } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from 'prop-types';
 import "./Modal.css";
@@ -8,39 +7,52 @@ import "./Modal.css";
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({forRender, onClose}) {
+class Modal extends Component {
+    state = {
+        largeImage: '',
+        alt: '',        
+    }
     
-    const { largeImageURL, alt } = forRender;
-    useEffect(() => {
+    componentDidMount() {
+        const { largeImageURL, tags } = this.props.forRender;
+        this.setState({
+            largeImage: largeImageURL,
+            alt: tags,
+        });
+        window.addEventListener('keydown', this.handleKeyDown)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown)
         
-        const handleKeyDown = e => {
-        
-            if (e.code === 'Escape') {                
-                onClose();
+    }
+    handleKeyDown = e => {
+            if (e.code === 'Escape') {
+                console.log(e.code);
+                this.props.onClose();
             }
     }
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    },[onClose])
-    
-    const handleBackdropClick = e => {
+    handleBackdropClick = e => {
         if (e.currentTarget === e.target) {
-            onClose();
+            this.props.onClose();
         }
     }
-    return createPortal(
-        <div className="Overlay" onClick={handleBackdropClick}>
-            <div className="Modal">
-                
-                <img src={largeImageURL} alt={alt} />
-                
-            </div>
-        </div>,
-        modalRoot
-    );
-
+    render() {
+        const { largeImage, tags } = this.state;
+        return createPortal(
+            <div className="Overlay" onClick={this.handleBackdropClick}>
+                <div className="Modal"> 
+                    {/* {this.props.children} */}                    
+                    <img src={largeImage} alt={tags} />
+                    {/* <button type="button" onClick={this.props.onClose}>жми</button> */}
+                </div>
+            </div>, 
+            modalRoot
+        )
+    };
 }
 
+
+export default Modal;
 
 Modal.propTypes = {
     forRender: PropTypes.object,

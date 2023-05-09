@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import ImageGalleryItem from "components/ImageGalleryItem";
+// import { BallTriangle } from "react-loader-spinner";
 import "./ImageGallery.css";
 
 const ImageGallery = ({images, onClick }) =>(            
@@ -14,7 +15,7 @@ const ImageGallery = ({images, onClick }) =>(
 export default ImageGallery;
 
 ImageGallery.propTypes = {
-    
+    // status: PropTypes.string.isRequired,
     images: PropTypes.array.isRequired,
     onClick: PropTypes.func.isRequired,
 

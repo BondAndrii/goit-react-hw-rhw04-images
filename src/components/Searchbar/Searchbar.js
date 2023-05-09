@@ -1,43 +1,42 @@
-import React from "react";
-import {useState } from "react";
+import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
 import '../styles.css'
 
+// import './Searchbar.css'
 
 
-export default function Searchbar({priSubmit}) {
-    const [searchName, setSearchName] = useState('');
-    const handleInput = e => {
-        setSearchName(e.currentTarget.value.toLowerCase());
-        
-    };
-    
-    const handleSubmit = (e) => {
+class Searchbar extends Component { 
+    state = {
+        searchName: '',
+    }
+    handleInput = e => {
+        this.setState({ searchName: e.currentTarget.value.toLowerCase() })
+    }
+    handleSubmit = (e) => {
         e.preventDefault();
-       
-        if (searchName.trim() === '') {
+        if (this.state.searchName.trim() === '') {
             alert('Please enter name for search');            
             return;
         }
-       
-        priSubmit(searchName);
-        
-        setSearchName('');
-        
+        this.props.onSubmit(this.state.searchName);
+        // console.log("searshName при сабмите", this.state.searshName);
+        this.setState ({ searchName: '' });
     }
+    render() {
+        console.log("searshName в рендері", this.state.searshName);
     return (
         <header className="Searchbar">
-            <form onSubmit={handleSubmit } className="SearchForm ">
+            <form onSubmit={this.handleSubmit } className="SearchForm ">
                 <button type="submit" className="SearchForm-button">
                     <span >Search</span>
                 </button>
 
                 <input
-                    onChange={handleInput}
+                    onChange={this.handleInput}
                     className="SearchForm-input "
                     type="text"
-                    value={searchName}
+                    value={this.state.searchName}
                     autoComplete="off"
                     autoFocus
                     placeholder="Search images and photos"
@@ -46,7 +45,9 @@ export default function Searchbar({priSubmit}) {
             </form>
         </header>
     )
-} 
+}
+}
+export default Searchbar;
 
 Searchbar.propTypes = {
     onSubmit: PropTypes.func.isRequired,

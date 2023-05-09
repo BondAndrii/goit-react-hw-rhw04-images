@@ -90,7 +90,7 @@ export default class App extends Component {
         <Searchbar onSubmit={this.handleSubmit} />
         {status === 'idle' && <h2>Введіть, щоб ви хотіли побачити...</h2>}
         {status === 'pending' && <Loader />}
-        {status === 'rejected' && <h2>Нажаль, за запитом нічого не знайшли</h2>}
+        {status === 'rejected' && <h2>Нажаль, за запитом нічого не знайдено</h2>}
         {status === 'resolved' && <ImageGallery images={images} onClick={this.handleClickImg}/>}        
         {showBtn && <Button onClick={this.handleButton} /> }
         {showModal && <Modal forRender={forModal} onClose={this.toggleModal} />}

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import ImageGalleryItem from "components/ImageGalleryItem";
-// import { BallTriangle } from "react-loader-spinner";
 import "./ImageGallery.css";
 
 const ImageGallery = ({images, onClick }) =>(            
